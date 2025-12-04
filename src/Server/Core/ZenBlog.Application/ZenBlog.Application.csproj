@@ -19,6 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Comments\" />
+    <Folder Include="Features\ContactInfos\" />
+    <Folder Include="Features\Messages\" />
+    <Folder Include="Features\Socials\" />
+    <Folder Include="Features\SubComments\" />
     <Folder Include="Mappings\" />
   </ItemGroup>
 
