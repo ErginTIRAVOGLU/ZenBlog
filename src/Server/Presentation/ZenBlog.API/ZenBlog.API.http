@@ -1,0 +1,7 @@
+@ZenBlog.API_HostAddress = http://localhost:5279
+
+GET {{ZenBlog.API_HostAddress}}/api/categories
+  Accept: application/json
+Accept: application/json
+
+###
