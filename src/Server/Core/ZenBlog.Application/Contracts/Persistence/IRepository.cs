@@ -1,4 +1,3 @@
-using System;
 using System.Linq.Expressions;
 using ZenBlog.Domain.Entities.Common;
 
@@ -11,6 +10,6 @@ public interface IRepository<TEntity> where TEntity : BaseEntity
     Task<TEntity?> GetByIdAsync(Guid id,CancellationToken cancellationToken = default);
     Task<TEntity?> GetSingleAsync(Expression<Func<TEntity, bool>> filter, bool tracking = false,CancellationToken cancellationToken = default);
     Task CreateAsync(TEntity entity,CancellationToken cancellationToken = default);
-    void UpdateAsync(TEntity entity);
-    void DeleteAsync(TEntity entity);
+    void Update(TEntity entity);
+    void Delete(TEntity entity);
 }

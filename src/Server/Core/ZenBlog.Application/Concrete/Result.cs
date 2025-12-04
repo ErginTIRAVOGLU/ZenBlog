@@ -1,27 +1,25 @@
-using System;
-
 namespace ZenBlog.Application.Concrete;
 
 public sealed class Result<T>
 {
-    public T Data { get; }
-    public bool IsSuccess => !Errors.Any();
-    public IReadOnlyCollection<Error> Errors { get; }
+    public T? Data { get; }
+    public bool IsSuccess => Errors == null || !Errors.Any();
+    public IReadOnlyCollection<Error>? Errors { get; }
 
-    private Result(T data, IReadOnlyCollection<Error> errors)
+    private Result(T? data, IReadOnlyCollection<Error>? errors)
     {
         Data = data;
         Errors = errors;
     }
 
-    public static Result<T> Success(T data) => new Result<T>(data, Array.Empty<Error>());
+    public static Result<T> Success(T data) => new Result<T>(data, null);
 
     public static Result<T> Failure(params Error[] errors)
     {
         if (errors == null || errors.Length == 0)
             throw new ArgumentException("At least one error is required for a failed result.", nameof(errors));
         
-        return new Result<T>(default!, errors);
+        return new Result<T>(default(T), errors);
     }
 
     public static Result<T> Failure(IEnumerable<Error> errors)

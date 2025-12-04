@@ -1,4 +1,3 @@
-using System;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using ZenBlog.Application.Contracts.Persistence;
@@ -32,12 +31,12 @@ public sealed class GenericRepository<TEntity>(AppDbContext context) : IReposito
         await _dbSet.AddAsync(entity, cancellationToken);
     }
 
-    public void DeleteAsync(TEntity entity)
+    public void Delete(TEntity entity)
     {
         _dbSet.Remove(entity);
     }
 
-    public void UpdateAsync(TEntity entity)
+    public void Update(TEntity entity)
     {
         _dbSet.Update(entity);
     }

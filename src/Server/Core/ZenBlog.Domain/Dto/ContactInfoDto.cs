@@ -1,4 +1,3 @@
-using System;
 using ZenBlog.Domain.Dto.Common;
 
 namespace ZenBlog.Domain.Dto;

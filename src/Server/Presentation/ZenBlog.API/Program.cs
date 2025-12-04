@@ -5,6 +5,8 @@ using ZenBlog.API.Endpoints;
 using Mapster;
 using MapsterMapper;
 using ZenBlog.Application.Mappings;
+using Scalar.AspNetCore;
+using ZenBlog.API.Handlers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,18 +22,23 @@ builder.Services.AddApplicationServices();
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddExceptionHandler<ExceptionHandler>().AddProblemDetails();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
+
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 
-app.MapCategoryEndpoints();
+EndpointsRegistration.MapEndpoints(app);
  
 
 app.Run();

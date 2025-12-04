@@ -1,5 +1,3 @@
-using System;
-
 namespace ZenBlog.Domain.Dto.Common;
 
 public class BaseEntityDto

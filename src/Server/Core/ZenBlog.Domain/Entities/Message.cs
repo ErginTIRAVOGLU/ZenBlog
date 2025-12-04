@@ -1,9 +1,8 @@
-using System;
 using ZenBlog.Domain.Entities.Common;
 
 namespace ZenBlog.Domain.Entities;
 
-public sealed class Message : BaseEntity
+public  class Message : BaseEntity
 {
     public string Name { get; set; } = default!;
     public string EMail { get; set; } = default!;
