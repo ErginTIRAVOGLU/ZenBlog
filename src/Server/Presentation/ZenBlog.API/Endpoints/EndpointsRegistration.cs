@@ -14,5 +14,6 @@ public static class EndpointsRegistration
         app.MapSocialEndpoints();
         app.MapSubCommentEndpoints();
         app.MapUserEndpoints();
+        app.MapAuthEndpoints();
     }
 }
