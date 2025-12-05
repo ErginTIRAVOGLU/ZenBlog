@@ -1,7 +1,11 @@
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using ZenBlog.Application.Contracts.Persistence;
+using ZenBlog.Application.Options;
 using ZenBlog.Domain.Entities;
 using ZenBlog.Persistence.Concrete;
 using ZenBlog.Persistence.Context;
@@ -31,5 +35,29 @@ public static class ServiceRegistrations
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         services.AddScoped<IJwtService, JwtService>();
+        
+        services.Configure<JwtTokenOptions>(configuration.GetSection("JwtTokenOptions"));
+
+        services.AddAuthentication(options => 
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+        {
+           var jwtTokenOptions = configuration.GetSection("JwtTokenOptions").Get<JwtTokenOptions>();
+           
+           options.TokenValidationParameters = new TokenValidationParameters
+           {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = jwtTokenOptions!.Issuer,
+                ValidAudience = jwtTokenOptions.Audience,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtTokenOptions.SecretKey!)),
+                ClockSkew = TimeSpan.Zero
+           };
+        });
+        services.AddAuthorization();
     }
 }

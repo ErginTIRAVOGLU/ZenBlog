@@ -34,10 +34,11 @@ public class JwtService(
        SymmetricSecurityKey key = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(jwtOptions.Value.SecretKey));
 
-        var dateTimeNow = DateTime.Now;
+        var dateTimeNow = DateTime.UtcNow;
 
         List<Claim> claims = new()
         {
+            new Claim(ClaimTypes.NameIdentifier, UserLoginInfo.Id),
             new Claim(JwtRegisteredClaimNames.Name, UserLoginInfo.UserName!),
             new Claim(JwtRegisteredClaimNames.Email, UserLoginInfo.Email!),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
@@ -49,14 +50,14 @@ public class JwtService(
             audience: jwtOptions.Value.Audience,
             claims: claims,
             notBefore: dateTimeNow,
-            expires: dateTimeNow.AddMinutes(jwtOptions.Value.ExpirationInMinutes),
+            expires: dateTimeNow.AddDays(jwtOptions.Value.ExpirationInDays),
             signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
         );
 
         GetLoginQueryResult response = new()
         {
             Token = new JwtSecurityTokenHandler().WriteToken(token),
-            Expiration = dateTimeNow.AddMinutes(jwtOptions.Value.ExpirationInMinutes)
+            Expiration = dateTimeNow.AddDays(jwtOptions.Value.ExpirationInDays)
         };
 
         return response;

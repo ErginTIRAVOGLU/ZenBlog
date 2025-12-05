@@ -8,5 +8,5 @@ public sealed class JwtTokenOptions
     public string Issuer { get; set; } = default!; //api.zenblog.com
     public string Audience { get; set; } = default!; //www.zenblog.com
     public string SecretKey { get; set; } = default!;
-    public int ExpirationInMinutes { get; set; }
+    public int ExpirationInDays { get; set; }
 }

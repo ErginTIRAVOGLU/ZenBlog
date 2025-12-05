@@ -13,10 +13,10 @@ public static class BlogEndpoints
         var group = app.MapGroup("/api/blogs")
             .WithTags("Blogs");
 
-        group.MapGet("/", GetAllBlogs)
+        group.MapGet("/", GetAllBlogs) 
           .WithName("GetAllBlogs");
 
-        group.MapGet("/{id:guid}", GetBlogById)
+        group.MapGet("/{id:guid}", GetBlogById) 
             .WithName("GetBlogById");
 
         group.MapPost("/", CreateBlog)

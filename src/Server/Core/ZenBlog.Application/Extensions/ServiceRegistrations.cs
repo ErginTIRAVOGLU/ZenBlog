@@ -22,7 +22,8 @@ public static class ServiceRegistrations
 
         services.Configure<JwtTokenOptions>( options =>
         {
-            configuration.GetSection(JwtTokenOptions.SectionName).Bind(options);
+            configuration.GetSection(JwtTokenOptions.SectionName).Get<JwtTokenOptions>();
+            
         });
     }
 
