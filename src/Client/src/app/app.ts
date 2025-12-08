@@ -1,4 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
+import { Blog } from './models/blog.model';
+
+declare var alertify: any;
 
 @Component({
   selector: 'app-root',
@@ -6,12 +9,11 @@ import { Component, signal } from '@angular/core';
   standalone: false,
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
+  ngOnInit(): void {
+    alertify.set('notifier','position', 'top-right');
+   }
   protected readonly title = signal('Client');
 
-  blogs:any[] = ["Blog1", "Blog2", "Blog3"];
 
-  getBlogs() {
-    return this.blogs;
-  }
 }

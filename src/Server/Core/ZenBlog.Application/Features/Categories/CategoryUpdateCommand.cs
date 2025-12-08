@@ -23,7 +23,8 @@ public sealed class CategoryUpdateCommandValidator : AbstractValidator<CategoryU
     {
         RuleFor(c => c.CategoryName)
             .NotEmpty().WithMessage("Category name is required.")
-            .MaximumLength(100).WithMessage("Category name must not exceed 100 characters.");
+            .MaximumLength(100).WithMessage("Category name must not exceed 100 characters.")
+            .MinimumLength(3).WithMessage("Category name must be at least 3 characters long.");
     }
 }
 

@@ -10,7 +10,7 @@ public static class SubCommentEndpoints
 {
     public static void MapSubCommentEndpoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("/api/sub-comments")
+        var group = app.MapGroup("/sub-comments")
             .WithTags("SubComments");
 
         group.MapGet("/", GetAllSubComments)

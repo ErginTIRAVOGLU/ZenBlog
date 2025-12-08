@@ -10,7 +10,7 @@ public static class BlogEndpoints
 {
     public static void MapBlogEndpoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("/api/blogs")
+        var group = app.MapGroup("/blogs")
             .WithTags("Blogs");
 
         group.MapGet("/", GetAllBlogs) 

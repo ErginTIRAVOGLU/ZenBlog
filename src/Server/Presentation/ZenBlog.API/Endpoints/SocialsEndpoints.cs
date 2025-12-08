@@ -10,7 +10,7 @@ public static class SocialsEndpoints
 {
     public static void MapSocialEndpoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("/api/socials")
+        var group = app.MapGroup("/socials")
             .WithTags("Socials");
 
         group.MapGet("/", GetAllSocials)

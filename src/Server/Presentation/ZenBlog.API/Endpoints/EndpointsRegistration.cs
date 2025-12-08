@@ -6,7 +6,7 @@ public static class EndpointsRegistration
 {
     public static void MapEndpoints(this IEndpointRouteBuilder app)
     {
-        var authGroup = app.MapGroup("/api").RequireAuthorization();
+        var authGroup = app.MapGroup("/api");//.RequireAuthorization();
         
         authGroup.MapBlogEndpoints();
         authGroup.MapCategoryEndpoints();

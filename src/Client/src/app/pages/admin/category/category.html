@@ -1,0 +1,63 @@
+<h1>Categories</h1>
+
+<table class="table table-bordered table-hover table-striped ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Category Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(category of this.categories(); track category; let index = $index) {
+    <tr>
+      <td>{{index + 1}}</td>
+      <td>{{category.categoryName}}</td>
+      <td>
+        <button class="btn btn-outline-info btn-sm me-2" (click)="editCategory(category)"  data-bs-toggle="modal" data-bs-target="#createModal">Edit</button>
+        <button class="btn btn-outline-danger btn-sm" (click)="deleteCategory(category.id)">Delete</button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+  Add New Category
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form #createCategoryForm="ngForm" (ngSubmit)="createCategory()">
+        <input type="hidden" name="id" [(ngModel)]="newCategory().id" />
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel">Create New Category</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group mb-3">
+              <label for="categoryName" class="form-label">Category Name</label>
+              <input type="text" class="form-control" [(ngModel)]="newCategory().categoryName" name="categoryName" placeholder="Enter category name" required="" minlength="3" maxlength="100"/>
+              @if(this.errors() !== null && this.errors().length > 0) {
+                @if(this.errors()[0].propertyName === 'CategoryName') {
+                <div>
+
+                    @for(error of this.errors(); track error) {
+                    <small class="text-danger">{{error.errorMessage}}</small>
+                    }
+
+                </div>
+                }
+              }
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="resetForm()">Close</button>
+          <button type="submit" class="btn btn-primary" [disabled]="createCategoryForm.invalid">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

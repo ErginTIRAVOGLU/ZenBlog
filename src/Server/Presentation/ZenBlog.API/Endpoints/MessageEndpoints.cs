@@ -10,7 +10,7 @@ public static class MessageEndpoints
 {
     public static void MapMessageEndpoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("/api/messages")
+        var group = app.MapGroup("/messages")
             .WithTags("Messages");
 
         group.MapGet("/", GetAllMessages)

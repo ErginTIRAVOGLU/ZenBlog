@@ -10,7 +10,7 @@ public static class ContactInfoEndpoints
 {
     public static void MapContactInfoEndpoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("/api/contact-infos")
+        var group = app.MapGroup("/contact-infos")
             .WithTags("ContactInfos");
 
         group.MapGet("/", GetAllContactInfos)

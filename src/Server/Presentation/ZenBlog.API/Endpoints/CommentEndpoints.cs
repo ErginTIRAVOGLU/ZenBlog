@@ -10,7 +10,7 @@ public static class CommentEndpoints
 {
     public static void MapCommentEndpoints(this IEndpointRouteBuilder app)
     {
-        var group = app.MapGroup("/api/comments")
+        var group = app.MapGroup("/comments")
             .WithTags("Comments");
 
         group.MapGet("/", GetAllComments)
