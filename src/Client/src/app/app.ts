@@ -1,5 +1,4 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { Blog } from './models/blog.model';
 
 declare var alertify: any;
 

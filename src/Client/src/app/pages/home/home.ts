@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Blog } from '../../models/blog.model';
 
 @Component({
   selector: 'app-home',

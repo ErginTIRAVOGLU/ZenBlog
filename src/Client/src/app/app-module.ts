@@ -11,6 +11,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { Dashboard } from './pages/admin/dashboard/dashboard';
 import { FormsModule } from '@angular/forms';
 import { SweetalertService } from './services/sweetalert-service';
+import { Blog } from './pages/admin/blog/blog';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SweetalertService } from './services/sweetalert-service';
     MainLayout,
     Home,
     Category,
-    Dashboard
+    Dashboard,
+    Blog
   ],
   imports: [
     BrowserModule,

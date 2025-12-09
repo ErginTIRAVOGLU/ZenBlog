@@ -5,6 +5,7 @@ import { Home } from './pages/home/home';
 import { AdminLayout } from './layouts/admin-layout/admin-layout';
 import { Category } from './pages/admin/category/category';
 import { Dashboard } from './pages/admin/dashboard/dashboard';
+import { Blog } from './pages/admin/blog/blog';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'category',
         component: Category,
+      },
+      {
+        path: 'blog',
+        component: Blog,
       },
     ],
   },

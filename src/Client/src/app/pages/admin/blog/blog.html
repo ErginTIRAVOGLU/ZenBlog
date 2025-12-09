@@ -1,0 +1,31 @@
+<h1>Blogs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Image</th>
+      <th>Blog Title</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>User</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(blog of this.blogs(); track blog; let index = $index) {
+    <tr>
+      <td>{{index + 1}}</td>
+      <td><img src="{{blog.imageUrl}}" alt="{{blog.title}}" style="width: 50px; height: auto;"></td>
+      <td>{{blog.title}}</td>
+      <td>{{blog.description}}</td>
+      <td>{{blog.categoryId}}</td>
+      <td>{{blog.userId}}</td>
+      <td>
+        <button class="btn btn-outline-info btn-sm me-2" (click)="editBlog(blog)"  data-bs-toggle="modal" data-bs-target="#createModal">Edit</button>
+        <button class="btn btn-outline-danger btn-sm" (click)="deleteBlog(blog.id)">Delete</button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

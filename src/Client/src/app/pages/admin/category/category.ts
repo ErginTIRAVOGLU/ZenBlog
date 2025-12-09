@@ -18,7 +18,7 @@ export class Category implements OnInit {
   readonly categories = signal<CategoryModel[]>([]);
   readonly newCategory = signal<CategoryModel>(initialCategory);
   readonly errors = signal<ErrorModel[]>([]);
-  readonly sweetAlert=inject(SweetalertService);
+  readonly sweetAlert = inject(SweetalertService);
 
   @ViewChild('createCategoryForm') createCategoryForm?: NgForm;
 
@@ -29,25 +29,27 @@ export class Category implements OnInit {
 
   getCategories() {
     this.categoryService.getCategories().subscribe({
-      next: result => {
-        console.log(result)
+      next: (result) => {
+        console.log(result);
         if (result.isSuccess && result.data) {
-
-                this.categories.set(result.data);
-              }
+          this.categories.set(result.data);
+        }
       },
-      error: err => {
+      error: (err) => {
         console.error('Error fetching categories:', err.message);
-      }});
+        alertify.error('An error occurred while fetching the categories.');
+      },
+    });
   }
 
-
   deleteCategory(id: string) {
-    this.sweetAlert.confirm('Delete Category','Are you sure you want to delete this category?').then((result) => {
-      if (result) {
-        this.performDeleteCategory(id);
-      }
-    });
+    this.sweetAlert
+      .confirm('Delete Category', 'Are you sure you want to delete this category?')
+      .then((result) => {
+        if (result) {
+          this.performDeleteCategory(id);
+        }
+      });
   }
 
   editCategory(category: CategoryModel) {
@@ -59,16 +61,16 @@ export class Category implements OnInit {
   performDeleteCategory(id: string) {
     this.categoryService.deleteCategory(id).subscribe({
       next: () => {
-        const updatedCategories = this.categories().filter(c => c.id !== id);
+        const updatedCategories = this.categories().filter((c) => c.id !== id);
         this.categories.set(updatedCategories);
         alertify.success('Deleted successfully!').then(() => {
           location.reload();
         });
       },
-      error: err => {
+      error: (err) => {
         console.error('Error deleting category:', err.message);
         alertify.error('An error occurred while deleting the category.');
-      }
+      },
     });
   }
 
@@ -76,7 +78,7 @@ export class Category implements OnInit {
     const category = this.newCategory();
 
     // Eğer id varsa update, yoksa create
-    if(category.id !== null && category.id !== ''){
+    if (category.id !== null && category.id !== '') {
       this.performUpdateCategory(category);
       return;
     }
@@ -86,7 +88,7 @@ export class Category implements OnInit {
 
   performCreateCategory(category: CategoryModel) {
     this.categoryService.createCategory(category).subscribe({
-      next: result => {
+      next: (result) => {
         if (result.isSuccess && result.data) {
           const updatedCategories = [...this.categories(), result.data];
           this.categories.set(updatedCategories);
@@ -95,12 +97,12 @@ export class Category implements OnInit {
           alertify.success('Created successfully!');
         }
       },
-      error: err => {
-        alertify.error("An error occurred while saving the category.");
-        if(err.error && err.error.errors) {
+      error: (err) => {
+        alertify.error('An error occurred while saving the category.');
+        if (err.error && err.error.errors) {
           this.errors.set(err.error.errors);
         }
-      }
+      },
     });
   }
 
@@ -112,7 +114,7 @@ export class Category implements OnInit {
 
     this.categoryService.updateCategory(category.id, category).subscribe({
       next: () => {
-        const index = this.categories().findIndex(c => c.id === category.id);
+        const index = this.categories().findIndex((c) => c.id === category.id);
         if (index !== -1) {
           const updatedCategories = [...this.categories()];
           updatedCategories[index] = category;
@@ -122,12 +124,12 @@ export class Category implements OnInit {
         this.closeModal();
         alertify.success('Updated successfully!');
       },
-      error: err => {
-        alertify.error("An error occurred while updating the category.");
-        if(err.error && err.error.errors) {
+      error: (err) => {
+        alertify.error('An error occurred while updating the category.');
+        if (err.error && err.error.errors) {
           this.errors.set(err.error.errors);
         }
-      }
+      },
     });
   }
 
@@ -144,6 +146,4 @@ export class Category implements OnInit {
       modal?.hide();
     }
   }
-
-
 }

@@ -1,9 +1,9 @@
-import { Blog } from "./blog.model";
+import { BlogModel } from "./blog.model";
 
 export interface CategoryModel {
   id: string;
   categoryName: string;
-  blogs: Blog[];
+  blogs: BlogModel[];
 }
 
 export const initialCategory: CategoryModel = {

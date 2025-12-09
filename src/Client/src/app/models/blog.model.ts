@@ -1,4 +1,4 @@
-export interface Blog {
+export interface BlogModel {
   id: string;
   title: string;
   coverImage: string;
@@ -9,7 +9,7 @@ export interface Blog {
 }
 
 
-export const initialBlog: Blog = {
+export const initialBlog: BlogModel = {
   id: '',
   title: '',
   coverImage: '',
