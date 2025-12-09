@@ -17,8 +17,11 @@ internal sealed class BlogGetAllQueryHandler(
 {
     public async Task<Result<List<BlogDto>>> HandleAsync(BlogGetAllQuery query, CancellationToken cancellationToken)
     {
-        var blogs = await blogRepository
-            .GetAllAsync(cancellationToken: cancellationToken);
+        var blogs = blogRepository.Where(
+            tracking: false,
+            b => b.Category,
+            b => b.User
+        ).ToList();
 
         var blogDtos = mapper.Map<List<BlogDto>>(blogs);
         return Result<List<BlogDto>>.Success(blogDtos);

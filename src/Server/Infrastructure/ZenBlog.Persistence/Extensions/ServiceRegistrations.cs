@@ -20,7 +20,7 @@ public static class ServiceRegistrations
         services.AddDbContext<AppDbContext>(options =>{
             options.UseSqlServer(configuration.GetConnectionString("SqlConnection"));
             options.AddInterceptors(new AuditContextInterceptor());
-            options.UseLazyLoadingProxies();
+            //options.UseLazyLoadingProxies();
         });
 
         services.AddIdentity<AppUser, AppRole>(options =>

@@ -9,7 +9,7 @@ namespace ZenBlog.Application.Features.Blogs;
 public sealed record BlogUpdateRequest(
     string Title,
     string CoverImage,
-    string ConteBlogImagent,
+    string BlogImage,
     string Description,
     Guid CategoryId
 );
@@ -18,7 +18,7 @@ public sealed record BlogUpdateCommand (
     Guid BlogId,
     string Title,
     string CoverImage,
-    string ConteBlogImagent,
+    string BlogImage,
     string Description,
     Guid CategoryId
 ) : ICommand<Result<BlogUpdateCommand>>;
@@ -38,7 +38,7 @@ public sealed class BlogUpdateCommandValidator : AbstractValidator<BlogUpdateCom
         RuleFor(b => b.CoverImage)
             .NotEmpty().WithMessage("Cover image is required.");
 
-        RuleFor(b => b.ConteBlogImagent)
+        RuleFor(b => b.BlogImage)
             .NotEmpty().WithMessage("Blog image is required.");
 
         RuleFor(b => b.Description)
@@ -63,7 +63,7 @@ internal sealed class BlogUpdateCommandHandler(
 
         blog.Title = command.Title;
         blog.CoverImage = command.CoverImage;
-        blog.BlogImage = command.ConteBlogImagent;
+        blog.BlogImage = command.BlogImage;
         blog.Description = command.Description;
         blog.CategoryId = command.CategoryId;
 

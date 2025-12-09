@@ -41,8 +41,19 @@ public sealed class GenericRepository<TEntity>(AppDbContext context) : IReposito
         _dbSet.Update(entity);
     }
 
-    public IQueryable<TEntity> Where(bool tracking = false)
+    public IQueryable<TEntity> Where(bool tracking = false, params Expression<Func<TEntity, object>>[] includes)
     {
-        return tracking ? _dbSet.AsQueryable() : _dbSet.AsNoTracking().AsQueryable();
+        IQueryable<TEntity> query = tracking ? _dbSet.AsQueryable() : _dbSet.AsNoTracking();
+        
+        if (includes != null && includes.Length > 0)
+        {
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+        }
+        
+        return query;
     }
+ 
 }

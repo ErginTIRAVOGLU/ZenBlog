@@ -73,7 +73,7 @@ public static class BlogEndpoints
         BlogUpdateRequest request,
         CancellationToken cancellationToken)
     {
-        var updateCommand = new BlogUpdateCommand(id, request.Title, request.CoverImage, request.ConteBlogImagent, request.Description, request.CategoryId);
+        var updateCommand = new BlogUpdateCommand(id, request.Title, request.CoverImage, request.BlogImage, request.Description, request.CategoryId);
 
         var result = await mediator.SendAsync(updateCommand, cancellationToken);
 

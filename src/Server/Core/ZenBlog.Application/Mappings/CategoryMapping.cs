@@ -8,6 +8,13 @@ public sealed class CategoryMapping : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {
-        config.NewConfig<Category, CategoryDto>();
+       config.ForType<Category, CategoryDto>()
+              .Ignore(dest => dest.Blogs); // Döngüyü KESEN yer
+    
+         config.ForType<Blog, BlogDto>()
+              .Map(dest => dest.CategoryName, src => src.Category.CategoryName)
+              .Map(dest => dest.UserName, src => src.User.UserName);
+
+
     }
 }

@@ -1,3 +1,5 @@
+import { CategoryModel, initialCategory } from "./category.model";
+
 export interface BlogModel {
   id: string;
   title: string;
@@ -5,7 +7,11 @@ export interface BlogModel {
   blogImage: string;
   description: string;
   categoryId: string;
+  categoryName: string;
   userId: string;
+  userName?: string;
+  createdAt: Date;
+  updatedAt?: Date;
 }
 
 
@@ -16,5 +22,9 @@ export const initialBlog: BlogModel = {
   blogImage: '',
   description: '',
   categoryId: '',
-  userId: ''
+  categoryName: '',
+  userId: '',
+  userName: '',
+  createdAt: new Date(),
+  updatedAt: undefined,
 }

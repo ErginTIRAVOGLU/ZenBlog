@@ -12,6 +12,7 @@ import { Dashboard } from './pages/admin/dashboard/dashboard';
 import { FormsModule } from '@angular/forms';
 import { SweetalertService } from './services/sweetalert-service';
 import { Blog } from './pages/admin/blog/blog';
+import { TruncateWordsPipe } from './shared/pipes/truncate-words.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { Blog } from './pages/admin/blog/blog';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    TruncateWordsPipe
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

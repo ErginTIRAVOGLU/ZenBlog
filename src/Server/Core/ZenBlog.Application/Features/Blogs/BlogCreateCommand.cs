@@ -9,7 +9,7 @@ namespace ZenBlog.Application.Features.Blogs;
 public sealed record BlogCreateCommand(
     string Title,
     string CoverImage,
-    string ConteBlogImagent,
+    string BlogImage,
     string Description,
     string UserId,
     Guid CategoryId
@@ -26,7 +26,7 @@ public sealed class BlogCreateCommandValidator : AbstractValidator<BlogCreateCom
         RuleFor(b => b.CoverImage)
             .NotEmpty().WithMessage("Cover image is required.");
 
-        RuleFor(b => b.ConteBlogImagent)
+        RuleFor(b => b.BlogImage)
             .NotEmpty().WithMessage("Blog image is required.");
 
         RuleFor(b => b.Description)
@@ -51,7 +51,7 @@ internal sealed class BlogCreateCommandHandler(
         {
             Title = command.Title,
             CoverImage = command.CoverImage,
-            BlogImage = command.ConteBlogImagent,
+            BlogImage = command.BlogImage,
             Description = command.Description,
             UserId = command.UserId,
             CategoryId = command.CategoryId
