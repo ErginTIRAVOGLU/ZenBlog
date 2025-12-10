@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { SweetalertService } from './services/sweetalert-service';
 import { Blog } from './pages/admin/blog/blog';
 import { TruncateWordsPipe } from './shared/pipes/truncate-words.pipe';
+import { Login } from './pages/auth/login/login';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TruncateWordsPipe } from './shared/pipes/truncate-words.pipe';
     Home,
     Category,
     Dashboard,
-    Blog
+    Blog,
+    Login
   ],
   imports: [
     BrowserModule,

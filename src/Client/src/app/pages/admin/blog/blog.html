@@ -51,75 +51,55 @@
         <div class="modal-body">
           <div class="form-group mb-3">
             <label for="title" class="form-label">Blog Title</label>
-            <input type="text" class="form-control" [(ngModel)]="newBlog().title" name="title" placeholder="Enter blog title" required="" minlength="3" maxlength="200"/>
+            <input type="text" class="form-control" [(ngModel)]="newBlog().title" [ngModelOptions]="{standalone: true}" name="title" placeholder="Enter blog title"  minlength="3" maxlength="200" required=""/>
             @if(this.errors() !== null && this.errors().length > 0) {
-              @if(this.errors()[0].propertyName === 'Title') {
-              <div>
-                @for(error of this.errors(); track error) {
-                <small class="text-danger">{{error.errorMessage}}</small>
-                }
-              </div>
+              @for(error of this.getErrorsByProperty('Title'); track error) {
+              <small class="text-danger">{{error.errorMessage}}</small>
               }
             }
           </div>
 
           <div class="form-group mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" [(ngModel)]="newBlog().description" name="description" placeholder="Enter blog description" required="" minlength="10" maxlength="2000" rows="4"></textarea>
+            <textarea class="form-control" [(ngModel)]="newBlog().description"[ngModelOptions]="{standalone: true}" name="description" placeholder="Enter blog description"  minlength="10" maxlength="2000" rows="4" required=""></textarea>
             @if(this.errors() !== null && this.errors().length > 0) {
-              @if(this.errors()[0].propertyName === 'Description') {
-              <div>
-                @for(error of this.errors(); track error) {
-                <small class="text-danger">{{error.errorMessage}}</small>
-                }
-              </div>
+              @for(error of this.getErrorsByProperty('Description'); track error) {
+              <small class="text-danger">{{error.errorMessage}}</small>
               }
             }
           </div>
 
           <div class="form-group mb-3">
             <label for="categoryId" class="form-label">Category</label>
-            <select class="form-control" [(ngModel)]="newBlog().categoryId" name="categoryId" required="">
+            <select class="form-control" [(ngModel)]="newBlog().categoryId" [ngModelOptions]="{standalone: true}" name="categoryId" required="">
               <option value="">Select a category</option>
               @for(category of this.categories(); track category.id) {
                 <option [value]="category.id">{{category.categoryName}}</option>
               }
             </select>
             @if(this.errors() !== null && this.errors().length > 0) {
-              @if(this.errors()[0].propertyName === 'CategoryId') {
-              <div>
-                @for(error of this.errors(); track error) {
-                <small class="text-danger">{{error.errorMessage}}</small>
-                }
-              </div>
+              @for(error of this.getErrorsByProperty('CategoryId'); track error) {
+              <small class="text-danger">{{error.errorMessage}}</small>
               }
             }
           </div>
 
           <div class="form-group mb-3">
             <label for="coverImage" class="form-label">Cover Image</label>
-            <input type="text" class="form-control" [(ngModel)]="newBlog().coverImage" name="coverImage" placeholder="Enter cover image filename" required=""/>
+            <input type="text" class="form-control" [(ngModel)]="newBlog().coverImage" [ngModelOptions]="{standalone: true}" name="coverImage" placeholder="Enter cover image filename"  required=""/>
             @if(this.errors() !== null && this.errors().length > 0) {
-              @if(this.errors()[0].propertyName === 'CoverImage') {
-              <div>
-                @for(error of this.errors(); track error) {
-                <small class="text-danger">{{error.errorMessage}}</small>
-                }
-              </div>
+              @for(error of this.getErrorsByProperty('CoverImage'); track error) {
+              <small class="text-danger">{{error.errorMessage}}</small>
               }
             }
           </div>
 
           <div class="form-group mb-3">
             <label for="blogImage" class="form-label">Blog Image</label>
-            <input type="text" class="form-control" [(ngModel)]="newBlog().blogImage" name="blogImage" placeholder="Enter blog image filename" required=""/>
+            <input type="text" class="form-control" [(ngModel)]="newBlog().blogImage" [ngModelOptions]="{standalone: true}" name="blogImage" placeholder="Enter blog image filename"  required=""/>
             @if(this.errors() !== null && this.errors().length > 0) {
-              @if(this.errors()[0].propertyName === 'BlogImage') {
-              <div>
-                @for(error of this.errors(); track error) {
-                <small class="text-danger">{{error.errorMessage}}</small>
-                }
-              </div>
+              @for(error of this.getErrorsByProperty('BlogImage'); track error) {
+              <small class="text-danger">{{error.errorMessage}}</small>
               }
             }
           </div>

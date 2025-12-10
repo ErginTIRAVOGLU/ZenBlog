@@ -6,6 +6,7 @@ import { AdminLayout } from './layouts/admin-layout/admin-layout';
 import { Category } from './pages/admin/category/category';
 import { Dashboard } from './pages/admin/dashboard/dashboard';
 import { Blog } from './pages/admin/blog/blog';
+import { Login } from './pages/auth/login/login';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
         component: Home,
       },
     ],
+  },
+  {
+    path: 'login',
+    component:  Login
   },
   {
     path: 'admin',

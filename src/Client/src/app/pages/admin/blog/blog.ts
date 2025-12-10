@@ -17,7 +17,7 @@ declare var alertify: any;
 })
 export class Blog implements OnInit {
   readonly blogs = signal<BlogModel[]>([]);
-  readonly newBlog = signal<BlogModel>(initialBlog);
+  readonly newBlog = signal<BlogModel>( { ...initialBlog } );
   readonly errors = signal<ErrorModel[]>([]);
   readonly categories = signal<CategoryModel[]>([]);
   readonly blogService = inject(BlogService);
@@ -66,6 +66,7 @@ export class Blog implements OnInit {
   }
 
   addNewBlog() {
+     this.newBlog.set({ ...initialBlog });
     this.resetForm();
   }
 
@@ -96,6 +97,7 @@ export class Blog implements OnInit {
   }
 
   createBlog() {
+    console.log(this.newBlog());
     const blog = this.newBlog();
 
     if (blog.id !== null && blog.id !== '') {
@@ -148,7 +150,7 @@ export class Blog implements OnInit {
   }
 
   resetForm() {
-    this.newBlog.set(initialBlog);
+  this.newBlog.set({ ...initialBlog });
     this.errors.set([]);
     this.createBlogForm?.resetForm();
   }
@@ -178,5 +180,9 @@ export class Blog implements OnInit {
         }))
       });
     }
+  }
+
+  getErrorsByProperty(propertyName: string): ErrorModel[] {
+    return this.errors().filter(e => e.propertyName === propertyName);
   }
 }

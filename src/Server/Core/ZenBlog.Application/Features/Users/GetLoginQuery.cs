@@ -15,13 +15,13 @@ public sealed class GetLoginQueryResult
 }
 
 
-public sealed record GetLoginQuery(string EmailOrPassword, string Password) : IQuery<Result<GetLoginQueryResult>>;
+public sealed record GetLoginQuery(string EmailOrUserName, string Password) : IQuery<Result<GetLoginQueryResult>>;
 
 public sealed class GetLoginValidation : AbstractValidator<GetLoginQuery>
 {
     public GetLoginValidation()
     {
-        RuleFor(x => x.EmailOrPassword)
+        RuleFor(x => x.EmailOrUserName)
             .NotEmpty().WithMessage("Email or Password is required.");
 
         RuleFor(x => x.Password)
@@ -36,10 +36,10 @@ internal sealed class GetLoginQueryHandler(
 {
     public async Task<Result<GetLoginQueryResult>> HandleAsync(GetLoginQuery query, CancellationToken cancellationToken)
     {
-        var user = await userManager.FindByEmailAsync(query.EmailOrPassword);
+        var user = await userManager.FindByEmailAsync(query.EmailOrUserName);
         if (user is null)
         {
-            user= await userManager.FindByNameAsync(query.EmailOrPassword);
+            user= await userManager.FindByNameAsync(query.EmailOrUserName);
             if (user is null)
             {
                 return Result<GetLoginQueryResult>.Failure( new Error("Email Or Password", "Invalid email or password."));
